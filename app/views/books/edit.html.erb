@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>WEBCAMP 基礎学習フェーズ　課題2</title>
+  </head>
+  <body>
+    <h1>Editing Book</h1>
+
+    <div id="errors">
+    <% if @book.errors.any? %>
+     <h4><%= @book.errors.count %> error prohibited this book from being saved:</h4>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+    </div>
+    <% end %>
+
+    <%= form_with model: @book, url:update_book_path(@book.id), method: :patch do |f| %>
+
+     <h4>Title</h4>
+     <ul><%= f.text_field :title,{size:"30"} %></ul>
+
+     <h4>Body</h4>
+     <ul><%= f.text_area :body,{size:"32x5"} %></ul>
+     <ul><%= f.submit 'Update Book' %></ul>
+
+     <ul><%= link_to "Show", book_path(@book.id) %>
+     <span>|</span>
+     <%= link_to "Back", "/books" %>
+     </ul>
+    <% end %>
+
+  </body>
+</html>
